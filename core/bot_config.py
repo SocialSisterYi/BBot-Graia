@@ -10,7 +10,7 @@ DEFUALT_CONFIG_PATH = Path("data", "bot_config.yaml")
 
 
 class _Mirai(BaseModel, extra=Extra.ignore):
-    account: int
+    account: str
     verify_key: str
     mirai_host: AnyHttpUrl
 

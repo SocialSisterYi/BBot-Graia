@@ -37,7 +37,7 @@ for /f "tokens=*" %%a in ('dir /b /s /a-d bbot*.exe') do (
 os.environ["PLAYWRIGHT_BROWSERS_PATH"] = Path("data", "browser").absolute().as_posix()
 
 # 加载配置项webui
-def load_config_webui(reason: str = "未知原因", err: dict = None):
+def load_config_webui(reason: str = "未知原因", err: dict = {}):
     import uvicorn
     from fastapi import FastAPI
     from fastapi.staticfiles import StaticFiles
