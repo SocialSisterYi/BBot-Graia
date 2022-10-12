@@ -19,7 +19,7 @@ speedups = ["aiodns", "brotlipy", "cchardet"]
 
 [[package]]
 name = "amiyabot"
-version = "1.1.14"
+version = "1.1.15"
 description = "简洁高效的异步 Python QQ 频道机器人框架"
 category = "main"
 optional = false
@@ -42,6 +42,10 @@ starlette = ">=0.19.1,<0.20.0"
 uvicorn = ">=0.18.2,<0.19.0"
 websockets = ">=10.1,<11.0"
 zhon = ">=1.1.5,<1.2.0"
+
+[package.source]
+type = "file"
+url = "amiyabot-1.1.15-py3-none-any.whl"
 
 [[package]]
 name = "anyio"
@@ -980,7 +984,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "3e23c12abd60699df23d18ee3ca82e010c777cedfb67b8a1cb95180aca6c037a"
+content-hash = "ad6c968e0b43667979960d99322232e9c60593489759f67048a3c35c6fb9727e"
 
 [metadata.files]
 aiohttp = [
@@ -1023,7 +1027,7 @@ aiohttp = [
     {file = "aiohttp-3.7.4.post0.tar.gz", hash = "sha256:493d3299ebe5f5a7c66b9819eacdcfbbaaf1a8e84911ddffcdc48888497afecf"},
 ]
 amiyabot = [
-    {file = "amiyabot-1.1.14-py3-none-any.whl", hash = "sha256:e82912accf580f06724d3cb98ad49f371c0630a18a38540f43b60c2ed1a8ae11"},
+    {file = "amiyabot-1.1.15-py3-none-any.whl", hash = "sha256:6b849b1245e19de165bd0a56bf91de133d327b844f6f604dcd74c86f7031a484"},
 ]
 anyio = [
     {file = "anyio-3.6.1-py3-none-any.whl", hash = "sha256:cb29b9c70620506a9a8f87a309591713446953302d7d995344d0d7c6c0c9a7be"},

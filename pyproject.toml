@@ -7,7 +7,7 @@ license = "AGPL3.0"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-amiyabot = "^1.1.14"
+amiyabot = {path = "amiyabot-1.1.15-py3-none-any.whl"}
 bilireq = "^0.2.3"
 psutil = "^5.9.2"
 dynamicrendergrpc = "^1.0.5"

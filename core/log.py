@@ -2,6 +2,7 @@ import richuru
 
 from pathlib import Path
 from loguru import logger
+from amiyabot.log.manager import UserLogger
 
 from bot import BotConfig
 
@@ -57,6 +58,7 @@ logger.add(
 )
 
 logger.success(f"成功重载 logger，当前日志等级为 {log_level}")
+UserLogger.logger = logger
 
 # logger.trace("TRACE 等级将会输出至控制台")
 # logger.debug("DEBUG 等级将会输出至控制台")
