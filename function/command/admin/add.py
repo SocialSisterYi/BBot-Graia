@@ -1,44 +1,25 @@
-from graia.saya import Channel
-from graia.ariadne.app import Ariadne
-from graia.ariadne.model import Friend
-from graia.ariadne.message.chain import MessageChain
-from graia.ariadne.event.message import FriendMessage
-from graia.saya.builtins.broadcast.schema import ListenerSchema
-from graia.ariadne.message.parser.twilight import (
-    Twilight,
-    FullMatch,
-    RegexResult,
-    WildcardMatch,
-)
+import re
 
-from core.control import Permission
+from amiyabot import Message, Chain
+
+from bot import bot
 from bot import BotConfig
+from core.control import Permission
 
-channel = Channel.current()
+
+message_re = re.compile(r"添加管理员 ?(.*)")
 
 
-@channel.use(
-    ListenerSchema(
-        listening_events=[FriendMessage],
-        inline_dispatchers=[
-            Twilight(
-                [FullMatch("添加管理员"), "adminid" @ WildcardMatch(optional=True)],
-            )
-        ],
-    )
-)
-async def main(app: Ariadne, friend: Friend, adminid: RegexResult):
-    Permission.manual(friend, Permission.MASTER)
-    if adminid.matched:
-        say = adminid.result.display
-        if say.isdigit():
-            if int(say) in BotConfig.admins:
-                await app.send_friend_message(friend, MessageChain("该账号已是管理员"))
-            else:
-                BotConfig.admins.append(int(say))
-                BotConfig.save()
-                await app.send_friend_message(friend, MessageChain("成功将该账号设定为管理员"))
-        else:
-            await app.send_friend_message(friend, MessageChain("管理员账号仅可为数字"))
-    else:
-        await app.send_friend_message(friend, MessageChain("未输入管理员账号"))
+@bot.on_message(keywords=[message_re])
+async def main(ctx: Message):
+    Permission.manual(ctx.user_id, Permission.MASTER)
+    if message := message_re.match(ctx.text):
+        if not (say_qq := message[1]):
+            return Chain(ctx, True, True).text("未输入账号")
+        if not say_qq.isdigit():
+            return Chain(ctx, True, True).text("管理员账号仅可为数字")
+        if int(say_qq) in BotConfig.admins:
+            return Chain(ctx, True, True).text("该用户已经是管理员了")
+        BotConfig.admins.append(int(say_qq))
+        BotConfig.save()
+        return Chain(ctx, True, True).text("成功将该用户设定为管理员")

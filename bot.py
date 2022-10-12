@@ -16,7 +16,7 @@ base_telemetry()
 host = str(BotConfig.Mirai.mirai_host.host or "localhost")
 port = int(BotConfig.Mirai.mirai_host.port or 8080)
 
-accounts = (
+bot = (
     AmiyaBot(
         appid=BotConfig.Mirai.account,
         token=BotConfig.Mirai.verify_key,
@@ -28,7 +28,8 @@ accounts = (
     ),
 )
 
-bot = MultipleAccounts(*accounts)
+bot = MultipleAccounts(*bot)
+bot.set_prefix_keywords([BotConfig.name, BotConfig.name.upper(), BotConfig.name.lower()])
 
 if BotConfig.Bilibili.use_browser:
     from playwright.async_api import Playwright
